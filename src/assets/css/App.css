@@ -181,3 +181,14 @@ section {
     color:#403D52;
     margin: 0.5rem;
 }
+
+.box img {
+      height: 15rem; 
+    }
+
+.slogan {
+        font-family: 'Lovers Quarrel', cursive;
+        font-size: 4rem;
+        color: #FC0CA4;
+        padding: 1rem 0; 
+    }
