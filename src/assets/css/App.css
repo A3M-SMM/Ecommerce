@@ -215,3 +215,28 @@ p{
     color:#666;
     margin-top: 1rem;
 }
+
+.about .columns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.image{
+    width:90%;
+}
+
+.content{
+    flex:1 1 40rem;
+}
+
+h3{
+    font-size: 3rem;
+    color:#666;
+}
+
+
+.buttons a:last-child{
+    margin-left: 2rem;
+}
