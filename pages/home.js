@@ -17,6 +17,7 @@ const Home = () => {
                             <Route exact path= '/servicios/:1' element={<ItemListContainer/>} />
                             <Route exact path='/item/:idItem' element={<ItemDetail/>}/>
                             <Route path='*'><div> 404 Not Found! </div> </Route>
+                            <Route path='/cart'><div> <Cartwidget/></div> </Route>
                     </Routes>
                 <footer><div>Copyright @A3M.SMM</div></footer> 
             </BrowserRouter>
