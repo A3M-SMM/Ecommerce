@@ -1,19 +1,29 @@
 import { useEffect, useState } from 'react';
+import ItemList from '../components/ItemList';
+import { useParams } from 'react-router';
 import customFetch from "../utils/customFetch";
-
-const {data} = require ('./ItemDetail');
+import { firestoreFetchOne } from "../firebase/firestoneFetch";
 
 const ItemListContainer = () => {
-    const [count,setCount] = useState ({});
+    const [datos, setDatos] = useState([]);
+    const { idCategory } = useParams();
+
+    //componentDidUpdate
     useEffect(() => {
-        customFetch(2000,data[12])
-        .then(resultado => setCount(resultado))
-        .catch(error => console.log(error))
+        firestoreFetch(idCategory)
+            .then(result => setDatos(result))
+            .catch(err => console.log(err));
+    }, [idCategory]);
+
+    //componentWillUnmount
+    useEffect(() => {
+        return (() => {
+            setDatos([]);
+        })
     }, []);
 
-
 return (
-    <item item={count} />
+    <item item={datos} />
 );
 }
 
