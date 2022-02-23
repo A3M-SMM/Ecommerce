@@ -5,7 +5,49 @@ import './assets/css/App.css';
 
 const Cart = () => {
     
-    const test = useContext(CartContext);
+     const test = useContext(CartContext);
+
+    const createOrder = () => {
+		const itemsForDB = test.cartList.map(item => ({
+		  id: item.idItem,
+		  title: item.nameItem,
+		  price: item.costItem
+		}));
+
+    test.cartList.forEach(async (item) => {
+      const itemRef = doc(db, "products", item.idItem);
+      await updateDoc(itemRef, {
+        stock: increment(-item.qtyItem)
+      });
+    });
+
+    let order = {
+      buyer: {
+        name: "A3M SMM",
+        email: "a3m.smm@gmail.com",
+        phone: "5698745131"
+      },
+      total: test.calcTotal(),
+      items: itemsForDB,
+      date: serverTimestamp()
+    };
+  
+    console.log(order);
+    
+    const createOrderInFirestore = async () => {
+      // Add a new document with a generated id
+      const newOrderRef = doc(collection(db, "orders"));
+      await setDoc(newOrderRef, order);
+      return newOrderRef;
+    }
+  
+    createOrderInFirestore()
+      .then(result => alert('La Orden ha sido creada. Por favor tome el ID de su orden.\n\n\nOrder ID: ' + result.id + '\n\n'))
+      .catch(err => console.log(err));
+  
+    test.removeList();
+  
+  }
 
     return (
         <section class="about" id="about" >
